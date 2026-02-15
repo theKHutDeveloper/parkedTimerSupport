@@ -1,3 +1,9 @@
+---
+layout: default
+title: ParkedTimer Support
+---
+
+
 # ParkedTimer — Support
 
 Thank you for using **ParkedTimer** — your intelligent parking companion, designed to help you park with confidence and return without stress.
