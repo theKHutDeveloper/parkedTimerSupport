@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ParkedTimer — Support</title>
+<meta name="description" content="Support page for ParkedTimer, your intelligent parking companion for iOS.">
+<style>
+@font-face {
+  font-family: 'Display';
+  src: local('SF Pro Display'), local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Helvetica Neue');
+  font-weight: 100 900;
+}
+
+:root {
+  --ground: #F5F7FA;
+  --surface: #FFFFFF;
+  --surface-alt: #EDF1F7;
+  --text-primary: #1A2744;
+  --text-secondary: #5A6680;
+  --text-tertiary: #8B95A8;
+  --accent: #2B6CB0;
+  --accent-soft: #E3EDF8;
+  --accent-glow: rgba(43, 108, 176, 0.08);
+  --border: #DCE2EC;
+  --divider: #E8ECF2;
+  --shadow: rgba(26, 39, 68, 0.06);
+  --pro-gradient-start: #5B4FCF;
+  --pro-gradient-end: #2B6CB0;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #0F1520;
+    --surface: #1A2130;
+    --surface-alt: #222B3A;
+    --text-primary: #E4E8F0;
+    --text-secondary: #9AA3B5;
+    --text-tertiary: #6B7588;
+    --accent: #5A9FE0;
+    --accent-soft: #1E2D42;
+    --accent-glow: rgba(90, 159, 224, 0.06);
+    --border: #2A3344;
+    --divider: #252E3E;
+    --shadow: rgba(0, 0, 0, 0.2);
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground: #0F1520;
+  --surface: #1A2130;
+  --surface-alt: #222B3A;
+  --text-primary: #E4E8F0;
+  --text-secondary: #9AA3B5;
+  --text-tertiary: #6B7588;
+  --accent: #5A9FE0;
+  --accent-soft: #1E2D42;
+  --accent-glow: rgba(90, 159, 224, 0.06);
+  --border: #2A3344;
+  --divider: #252E3E;
+  --shadow: rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme="light"] {
+  --ground: #F5F7FA;
+  --surface: #FFFFFF;
+  --surface-alt: #EDF1F7;
+  --text-primary: #1A2744;
+  --text-secondary: #5A6680;
+  --text-tertiary: #8B95A8;
+  --accent: #2B6CB0;
+  --accent-soft: #E3EDF8;
+  --accent-glow: rgba(43, 108, 176, 0.08);
+  --border: #DCE2EC;
+  --divider: #E8ECF2;
+  --shadow: rgba(26, 39, 68, 0.06);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--ground);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header */
+.header {
+  padding: 56px 0 40px;
+  text-align: center;
+}
+
+.header-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px var(--shadow), 0 1px 3px var(--shadow);
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+  text-wrap: balance;
+}
+
+.header p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 32px;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* What's New */
+.whats-new {
+  background: var(--accent-glow);
+  border: 1px solid var(--accent-soft);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.whats-new-header {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.whats-new-header svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.whats-new ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.whats-new li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.whats-new li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+/* FAQ */
+.faq-item {
+  border-bottom: 1px solid var(--divider);
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-item details {
+  padding: 0;
+}
+
+.faq-item summary {
+  padding: 16px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: background 0.15s;
+  user-select: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--text-tertiary);
+  border-bottom: 2px solid var(--text-tertiary);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.faq-item details[open] > summary::after {
+  transform: rotate(-135deg);
+}
+
+.faq-item summary:hover {
+  background: var(--accent-glow);
+}
+
+.faq-item summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+
+.faq-answer {
+  padding: 0 20px 18px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.faq-answer p {
+  margin-bottom: 10px;
+}
+
+.faq-answer p:last-child {
+  margin-bottom: 0;
+}
+
+.faq-answer ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.faq-answer li {
+  padding-left: 18px;
+  position: relative;
+}
+
+.faq-answer li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-tertiary);
+  font-size: 12px;
+}
+
+/* Info sections */
+.info-card {
+  padding: 20px;
+}
+
+.info-card + .info-card {
+  border-top: 1px solid var(--divider);
+}
+
+.info-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.info-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.info-card p:last-child {
+  margin-bottom: 0;
+}
+
+.info-card ol {
+  list-style: none;
+  counter-reset: steps;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.info-card ol li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  counter-increment: steps;
+  padding-left: 24px;
+  position: relative;
+}
+
+.info-card ol li::before {
+  content: counter(steps);
+  position: absolute;
+  left: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 2px;
+}
+
+.info-card .alert-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.info-card .alert-list li {
+  padding: 4px 12px;
+  background: var(--surface-alt);
+  border-radius: 100px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.info-card .alert-list li::before {
+  display: none;
+}
+
+.callout {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  border-left: 2px solid var(--accent);
+  padding-left: 14px;
+  margin-top: 12px;
+  font-style: italic;
+}
+
+.highlight {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Pro features */
+.pro-card {
+  background: linear-gradient(135deg, var(--pro-gradient-start), var(--pro-gradient-end));
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 24px;
+  color: #fff;
+  margin-bottom: 32px;
+}
+
+.pro-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.pro-card ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.pro-card li {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  padding-left: 18px;
+  position: relative;
+}
+
+.pro-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+/* Contact */
+.contact-card {
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.contact-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.contact-card a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 10px 24px;
+  border: 1.5px solid var(--accent);
+  border-radius: 100px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.contact-card a:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.contact-card a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.contact-card .note {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 12px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 24px 0 48px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.footer span {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Privacy pill */
+.privacy-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-alt);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+.privacy-pill svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .header {
+    padding: 40px 0 28px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .pro-card ul {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header class="header">
+    <img class="header-icon" src="icon2.png" alt="ParkedTimer app icon" width="80" height="80"><br>
+    <div class="badge">Version 1.1</div>
+    <h1>ParkedTimer Support</h1>
+    <p>Your intelligent parking companion — park with confidence, return without stress.</p>
+  </header>
+
+  <!-- What's New -->
+  <div class="whats-new">
+    <div class="whats-new-header">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      What's new in 1.1
+    </div>
+    <ul>
+      <li><strong>AlarmKit integration</strong> — system-level alarm when your parking expires, even in Silent Mode and Focus</li>
+      <li><strong>Live Activity</strong> — real-time countdown on your Lock Screen and Dynamic Island</li>
+      <li>Apple Watch mirroring — your parking alarm appears on your wrist</li>
+      <li>Redesigned custom duration picker with a tap-to-select grid</li>
+      <li>Live car progress bar on the active timer — fills red as your time runs out</li>
+      <li>Haptic feedback on all selections and actions</li>
+      <li>Smarter suggested durations with improved accuracy</li>
+      <li>Refreshed app icon and navigation bar design</li>
+    </ul>
+  </div>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="section-label">Frequently Asked Questions</div>
+    <div class="card">
+      <div class="faq-item">
+        <details>
+          <summary>How does ParkedTimer work?</summary>
+          <div class="faq-answer">
+            <p>Start a parking session by selecting your desired duration. ParkedTimer monitors the time and sends reminders before expiry, giving you peace of mind wherever you park.</p>
+          </div>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>How do Smart Duration Suggestions work?</summary>
+          <div class="faq-answer">
+            <p>ParkedTimer learns from your previous visits to specific locations and suggests a duration based on your parking history there.</p>
+            <p>Over time, the app becomes smarter — helping you choose the right duration with less guesswork. Smart Suggestions are available with Pro.</p>
+          </div>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>How does the parking alarm work?</summary>
+          <div class="faq-answer">
+            <p>ParkedTimer uses AlarmKit (iOS 26+) to deliver a system-level alarm when your parking expires. Unlike regular notifications, this alarm cuts through Silent Mode and Focus filters — so you'll always know when your time is up.</p>
+            <p>When the alarm fires, you'll see two options: <span class="highlight">End Parking</span> to finish your session, or <span class="highlight">Extend</span> to open the app and add more time.</p>
+          </div>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>What is the Live Activity countdown?</summary>
+          <div class="faq-answer">
+            <p>When a parking session is active, a live countdown appears on your Lock Screen and in the Dynamic Island. You can see exactly how much time remains at a glance — no need to open the app.</p>
+          </div>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>How does the car progress bar work?</summary>
+          <div class="faq-answer">
+            <p>When a parking session is active, a car illustration fills from left to right in red as your time elapses. When the car is fully red, your parking has expired. It gives you an instant visual sense of how much time remains.</p>
+          </div>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>What does Pro include?</summary>
+          <div class="faq-answer">
+            <p>Upgrading to Pro unlocks the full ParkedTimer experience:</p>
+            <ul>
+              <li>Unlimited parking history</li>
+              <li>Smart duration suggestions by location</li>
+              <li>Cost tracking for each session</li>
+              <li>Monthly spending insights</li>
+              <li>Directions back to your car</li>
+              <li>Custom parking durations</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>I upgraded to Pro, but it isn't showing as active</summary>
+          <div class="faq-answer">
+            <p>Open <span class="highlight">Settings</span> and tap <span class="highlight">Restore Purchase</span>. If your status still hasn't updated, please contact us and we'll resolve it promptly.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pro -->
+  <div class="pro-card">
+    <h3>ParkedTimer Pro</h3>
+    <ul>
+      <li>Unlimited history</li>
+      <li>Smart suggestions</li>
+      <li>Cost tracking</li>
+      <li>Spending insights</li>
+      <li>Directions to car</li>
+      <li>Custom durations</li>
+    </ul>
+  </div>
+
+  <!-- Location & Notifications & Watch -->
+  <section class="section">
+    <div class="section-label">Setup &amp; Permissions</div>
+    <div class="card">
+      <div class="info-card">
+        <h3>Location Services</h3>
+        <p>ParkedTimer uses your location to save where you parked, provide directions back to your vehicle, and offer smart duration suggestions at familiar locations.</p>
+        <p>To enable location access:</p>
+        <ol>
+          <li>Open <span class="highlight">Settings → Privacy &amp; Security → Location Services</span></li>
+          <li>Select <span class="highlight">ParkedTimer</span></li>
+          <li>Choose <span class="highlight">While Using the App</span></li>
+        </ol>
+        <p class="callout">Your location is never tracked in the background and is not shared with third parties.</p>
+      </div>
+      <div class="info-card">
+        <h3>Notifications &amp; Alarms</h3>
+        <p>ParkedTimer uses two layers of alerts to make sure you never miss your parking expiry:</p>
+        <p><span class="highlight">Reminder notifications</span> are sent at regular intervals before your parking expires:</p>
+        <ul class="alert-list">
+          <li>15 min</li>
+          <li>10 min</li>
+          <li>5 min</li>
+          <li>1 min</li>
+        </ul>
+        <p><span class="highlight">Parking alarm</span> (iOS 26+) fires at the exact moment your parking expires. This is a system-level alarm powered by AlarmKit — it cuts through Silent Mode and Focus, so you'll always hear it.</p>
+        <p>To ensure reminders and alarms are delivered:</p>
+        <ol>
+          <li>Go to <span class="highlight">Settings → Notifications → ParkedTimer</span></li>
+          <li>Turn on <span class="highlight">Allow Notifications</span></li>
+          <li>Enable <span class="highlight">Lock Screen</span>, <span class="highlight">Banners</span>, and <span class="highlight">Sounds</span></li>
+          <li>When prompted, allow <span class="highlight">Alarm permissions</span> for ParkedTimer</li>
+        </ol>
+        <p class="callout">If alarm permission is denied, ParkedTimer falls back to a standard notification at expiry.</p>
+      </div>
+      <div class="info-card">
+        <h3>Apple Watch</h3>
+        <p>Parking reminders and the expiry alarm are mirrored to your Apple Watch — so even if your iPhone is in your pocket, you'll feel the alert on your wrist. Ensure notifications for ParkedTimer are enabled in the <span class="highlight">Watch app → Notifications</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <section class="section">
+    <div class="section-label">Privacy</div>
+    <div class="card">
+      <div class="info-card">
+        <p>ParkedTimer does not track you. Location is used solely to help you return to your parked car and to provide intelligent duration suggestions. Your parking history and data remain on your device.</p>
+        <div class="privacy-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          All data stays on your device
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section">
+    <div class="section-label">Support</div>
+    <div class="card">
+      <div class="contact-card">
+        <p>Experiencing a bug or technical issue? Include your iPhone model, iOS version, and a brief description of the issue.</p>
+        <a href="mailto:apocalypse.apps@proton.me">Contact Support</a>
+        <p class="note">We aim to respond within 48 hours.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    ParkedTimer <span>v1.1</span> · Made in London
+  </footer>
+
+</div>
+
+</body>
+</html>
